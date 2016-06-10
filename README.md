@@ -21,7 +21,26 @@ For existing code, or new projects which cannot employ RFX, RDoc will offer a fa
 ```
  
 # Complex types
- 
+#### data_types.rtype
+```
+ interface AppInitOptions {
+    cacheReservedMb   = 34,
+    databaseTimeoutMs = 1200
+ }
+//In this case we need a warning when the developer doesn't develop a default of cacheReserved into the function implementation
+```
+#### js file
+```javascript
+ /**
+  * (AppInitOptions)
+  * doc: Initialise application
+  */
+ let application.init = (options) => {
+     application.cacheReservedMb   = (options.cacheReservedMb   || options.cacheReservedMb   = 34);
+     application.databaseTimeoutMs = (options.databaseTimeoutMs || options.databaseTimeoutMs = 1200);
+     application.start()
+ }
+```
 # Requires
 The requires keyword makes it immediately clear where dependencies exist within code
 ```javascript
@@ -38,13 +57,13 @@ The requires keyword makes it immediately clear where dependencies exist within 
  let double = (op) => add(op, op);
 ```
 
-This works equally well with imported files
+This works equally well with imported libraries
 ```javascript
- import add from add
+ import math.js from mathjs
 
  /**
-  * (Number) => Number, requires: add
+  * (Number) => Number, requires: mathjs.chain, mathjs.add
   * doc: Double a number
   */
- let double = (op) => add(op, op);
+ let double = (op) => mathjs.chain(op).add(op);
 ```
