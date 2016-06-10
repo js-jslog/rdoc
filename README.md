@@ -7,6 +7,17 @@ RDoc allows developers to make use of Rtypes in expressive block comments which 
 
 
 # Comparison with RFX
- RFX provides developers with the same benefits listed above with the added benefit that code written in RFX is effectively _self documenting_. There are also potential performance benefits driving the project.
+RFX provides developers with the same benefits listed above with the added benefit that code written in RFX is effectively _self documenting_. There are also potential performance benefits driving the project.
+
+For existing code, or new projects which cannot employ RFX, RDoc will offer a familiar pattern of block comment documentation similar to JSDoc, but with enhanced readability & maintainability in code, richer generated docs & powerful tooling potential.
  
- For existing code, or new projects which cannot employ RFX, RDoc will offer a familiar pattern of block comment documentation similar to JSDoc, but with enhanced readability & maintainability in code, richer generated docs & powerful tooling potential.
+# Block comment
+```javascript
+/**
+ * (Number, Number) => Number
+ * doc: Add two numbers together
+ */
+ var function add (op1, op2) {
+     return op1 + op2;
+ }
+```
