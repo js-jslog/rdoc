@@ -25,6 +25,12 @@ For existing code, or new projects which cannot employ RFX, RDoc will offer a fa
 # Requires
 The requires keyword makes it immediately clear where dependencies exist within code
 ```javascript
+/**
+ * (Number, Number) => Number
+ * doc: Add two numbers together
+ */
+ let add = (op1, op2) => op1 + op2;
+
  /**
   * (Number) => Number, requires: add
   * doc: Double a number
@@ -34,11 +40,11 @@ The requires keyword makes it immediately clear where dependencies exist within 
 
 This works equally well with imported files
 ```javascript
-    import add from add
+ import add from add
 
-    /**
-     * (Number) => Number, requires: add
-     * doc: Double a number
-     */
-    let double = (op) => add(op, op);
+ /**
+  * (Number) => Number, requires: add
+  * doc: Double a number
+  */
+ let double = (op) => add(op, op);
 ```
