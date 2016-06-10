@@ -17,7 +17,28 @@ For existing code, or new projects which cannot employ RFX, RDoc will offer a fa
  * (Number, Number) => Number
  * doc: Add two numbers together
  */
- var function add (op1, op2) {
-     return op1 + op2;
- }
+ let add = (op1, op2) => op1 + op2;
+```
+ 
+# Complex types
+ 
+# Requires
+The requires keyword makes it immediately clear where dependencies exist within code
+```javascript
+ /**
+  * (Number) => Number, requires: add
+  * doc: Double a number
+  */
+ let double = (op) => add(op, op);
+```
+
+This works equally well with imported files
+```javascript
+    import add from add
+
+    /**
+     * (Number) => Number, requires: add
+     * doc: Double a number
+     */
+    let double = (op) => add(op, op);
 ```
