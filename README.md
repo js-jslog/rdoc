@@ -56,10 +56,28 @@ With the ability to define interrelated, custom types either in specialised vari
      id     : String,
      basket?: [ProductId]
  }
+ interface PageSubmitResult {
+     result_code    : String,
+     result_message?: String
+ }
  interface ProductId : Number
  interface Key : String
 ```
-### product_details.js
+### purchase_page.js
+```javascript
+import page from page
+
+let purchase_page = Object.create(page, {id: 'purchase_page'});
+
+/**
+ * (Transaction, Session) => PageSubmitResult, requires: db.update, throws: NoConnectionError
+ * doc: Check stock levels and customer credit, then update stock levels & custom credit
+ */
+purchase_page.purchase = (trans, session) => {
+    let result = /* busines logic to take session's basket, perform the appropriate check's & update's and create result */ 
+    return result;
+}
+```
 ```
  interface AppInitOptions {
     cacheReservedMb   = 34,
