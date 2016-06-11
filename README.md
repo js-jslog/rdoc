@@ -41,9 +41,21 @@ With the ability to define interrelated, custom types either in specialised vari
 #### data_types.rtype
 ```javascript
  interface Transaction {
-     id     : id,
-     db_conn: DatabaseConnection
+     id          : String,
+     session     : Session,
+     db_conn     : DatabaseConnection,
+     rowsAffected: [Key]
  }
+ interface DatabaseConnection {
+     id: String,
+     host: String,
+     user: String,
+     pass: String
+ }
+ interface Session {
+     id: String
+ }
+ interface Key : String
 ```
 ```
  interface AppInitOptions {
