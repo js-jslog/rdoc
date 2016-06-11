@@ -47,16 +47,19 @@ With the ability to define interrelated, custom types either in specialised vari
      rowsAffected: [Key]
  }
  interface DatabaseConnection {
-     id: String,
+     id  : String,
      host: String,
      user: String,
      pass: String
  }
  interface Session {
-     id: String
+     id     : String,
+     basket?: [ProductId]
  }
+ interface ProductId : Number
  interface Key : String
 ```
+### product_details.js
 ```
  interface AppInitOptions {
     cacheReservedMb   = 34,
