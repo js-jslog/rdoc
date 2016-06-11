@@ -35,6 +35,31 @@ The block comments are a natural and established way to want to document your co
  */
  let add = (op1, op2) => op1 + op2;
 ```
+# Requires
+The requires keyword makes it immediately clear where dependencies exist within code
+```javascript
+/**
+ * (Number, Number) => Number
+ * doc: Add two numbers together
+ */
+ let add = (op1, op2) => op1 + op2;
+
+ /**
+  * (Number) => Number, requires: add
+  * doc: Double a number
+  */
+ let double = (op) => add(op, op);
+```
+
+This works equally well with imported libraries
+```javascript
+ import math.js from mathjs
+
+ /**
+  * (Number) => Number, requires: mathjs.chain, mathjs.add
+  * doc: Double a number
+  */
+ let double = (op) => mathjs.chain(op).add(op);
  
 # Complex types
 With the ability to define interrelated, custom types either in specialised variables within the file or in external .rtype files, the descriptive potential is apparent.
@@ -77,49 +102,4 @@ purchase_page.purchase = (trans, session) => {
     let result = /* busines logic to take session's basket, perform the appropriate check's & update's and create result */ 
     return result;
 }
-```
-```
- interface AppInitOptions {
-    cacheReservedMb   = 34,
-    databaseTimeoutMs = 1200
- }
-//In this case we need a warning when the developer doesn't develop a default of cacheReserved into the function implementation
-```
-#### js file
-```javascript
- /**
-  * (AppInitOptions)
-  * doc: Initialise application
-  */
- let application.init = (options) => {
-     application.cacheReservedMb   = (options.cacheReservedMb   || options.cacheReservedMb   = 34);
-     application.databaseTimeoutMs = (options.databaseTimeoutMs || options.databaseTimeoutMs = 1200);
-     application.start()
- }
-```
-# Requires
-The requires keyword makes it immediately clear where dependencies exist within code
-```javascript
-/**
- * (Number, Number) => Number
- * doc: Add two numbers together
- */
- let add = (op1, op2) => op1 + op2;
-
- /**
-  * (Number) => Number, requires: add
-  * doc: Double a number
-  */
- let double = (op) => add(op, op);
-```
-
-This works equally well with imported libraries
-```javascript
- import math.js from mathjs
-
- /**
-  * (Number) => Number, requires: mathjs.chain, mathjs.add
-  * doc: Double a number
-  */
- let double = (op) => mathjs.chain(op).add(op);
 ```
