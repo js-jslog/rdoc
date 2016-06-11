@@ -60,7 +60,7 @@ This works equally well with imported libraries
   * doc: Double a number
   */
  let double = (op) => mathjs.chain(op).add(op);
- 
+```
 # Complex types
 With the ability to define interrelated, custom types either in specialised variables within the file or in external .rtype files, the descriptive potential is apparent.
 #### data_types.rtype
