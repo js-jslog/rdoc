@@ -33,27 +33,27 @@ The block comments are a natural and established way to want to document your co
  * (Number, Number) => Number
  * doc: Add two numbers together
  */
- let add = (op1, op2) => op1 + op2;
+let add = (op1, op2) => op1 + op2;
 ```
 # Requires
-The requires keyword makes it immediately clear where dependencies exist within code
+The `requires` keyword makes it immediately clear where dependencies exist within code
 ```javascript
 /**
  * (Number, Number) => Number
  * doc: Add two numbers together
  */
- let add = (op1, op2) => op1 + op2;
+let add = (op1, op2) => op1 + op2;
 
  /**
   * (Number) => Number, requires: add
   * doc: Double a number
   */
- let double = (op) => add(op, op);
+let double = (op) => add(op, op);
 ```
 
 This works equally well with imported libraries
 ```javascript
- import math.js from mathjs
+import mathjs from mathjs
 
  /**
   * (Number) => Number, requires: mathjs.chain, mathjs.add
@@ -61,6 +61,7 @@ This works equally well with imported libraries
   */
  let double = (op) => mathjs.chain(op).add(op);
 ```
+
 # Complex types
 With the ability to define interrelated, custom types either in specialised variables within the file or in external .rtype files, the descriptive potential is apparent.
 #### data_types.rtype
