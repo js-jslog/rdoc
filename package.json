@@ -1,0 +1,30 @@
+{
+  "name": "rdoc",
+  "version": "1.0.0",
+  "description": "A document generation application based on Rtypes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/js-jslog/rdoc.git"
+  },
+  "keywords": [
+    "rtype",
+    "document",
+    "generation"
+  ],
+  "author": "Joseph Sinfield",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/js-jslog/rdoc/issues"
+  },
+  "homepage": "https://github.com/js-jslog/rdoc#readme",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.9.0",
+    "grunt": "^1.0.1",
+    "grunt-babel": "^6.0.0",
+    "load-grunt-tasks": "^3.5.0"
+  }
+}
