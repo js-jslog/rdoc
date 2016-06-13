@@ -25,7 +25,7 @@ The block comments are a natural and established way to want to document your co
  *
  * (Not too readable. Not javascript native. Difficult to maintain)
  */
- let add = (op1, op2) => op1 + op2;
+let add = (op1, op2) => op1 + op2;
 ```
 ### Other hotness
 ```javascript
@@ -44,54 +44,54 @@ The `requires` keyword makes it immediately clear where dependencies exist withi
  */
 let add = (op1, op2) => op1 + op2;
 
- /**
-  * (Number) => Number, requires: add
-  * doc: Double a number
-  */
+/**
+ * (Number) => Number, requires: add
+ * doc: Double a number
+ */
 let double = (op) => add(op, op);
 ```
 
 This works equally well with imported libraries
 ```javascript
-import mathjs from mathjs
+import mathjs from mathjs;
 
- /**
-  * (Number) => Number, requires: mathjs.chain, mathjs.add
-  * doc: Double a number
-  */
- let double = (op) => mathjs.chain(op).add(op);
+/**
+ * (Number) => Number, requires: mathjs.chain, mathjs.add
+ * doc: Double a number
+ */
+let double = (op) => mathjs.chain(op).add(op);
 ```
 
 # Complex types
 With the ability to define interrelated, custom types either in specialised variables within the file or in external .rtype files, the descriptive potential is apparent.
 #### data_types.rtype
 ```javascript
- interface Transaction {
-     id          : String,
-     session     : Session,
-     db_conn     : DatabaseConnection,
-     rowsAffected: [Key]
- }
- interface DatabaseConnection {
-     id  : String,
-     host: String,
-     user: String,
-     pass: String
- }
- interface Session {
-     id     : String,
-     basket?: [ProductId]
- }
- interface PageSubmitResult {
-     result_code    : String,
-     result_message?: String
- }
- interface ProductId : Number
- interface Key : String
+interface Transaction {
+    id          : String,
+    session     : Session,
+    db_conn     : DatabaseConnection,
+    rowsAffected: [Key]
+}
+interface DatabaseConnection {
+    id  : String,
+    host: String,
+    user: String,
+    pass: String
+}
+interface Session {
+    id     : String,
+    basket?: [ProductId]
+}
+interface PageSubmitResult {
+    result_code    : String,
+    result_message?: String
+}
+interface ProductId : Number
+interface Key : String
 ```
 ### purchase_page.js
 ```javascript
-import page from page
+import page from page;
 
 let purchase_page = Object.create(page, {id: 'purchase_page'});
 
@@ -121,34 +121,49 @@ interface CostPerServicePerMonth: Dictionary[Month, CostPerService]
  * (Date,  Date) => CostPerServicePerMonth, requires: getCostData, aggregateCostDataByMonth
  */
 let getCostDataByMonth = (startDate, endDate) => {
-  let firstDay = // get the first day of the startDate month
-  let lastDay  = // get the last day of the endDate month
-  let allCostData = getCostData(firstDay, lastDay);
-  let aggCostData = aggregateCostDataByMonth(allCostData);
-  return aggCostData
+    let firstDay = // get the first day of the startDate month
+    let lastDay  = // get the last day of the endDate month
+    let allCostData = getCostData(firstDay, lastDay);
+    let aggCostData = aggregateCostDataByMonth(allCostData);
+    return aggCostData;
 }
 /**
  * (Day,  Day) => CostPerServicePerDay
  */
 let getCostData = (firstDay, lastDay) => {
- let resultSet = {};
- let query = // perform a query to get all rows of effort record between the two dates
- while (query.next()) {
- let serviceName = query.get("service")
- let day = query.get("date")
- let cost = query.get("cost")
-  if (serviceName] === undefined) {
-   resultSet[serviceName] = {}
-  }
-  if (resultSet[serviceName][day] === undefined) {
-   resultSet[serviceName][day] = cost
-  else {
-   resultSet[serviceName][day] += cost
-  }
- }
+    let resultSet = {};
+    let query = // perform a query to get all rows of effort record between the two dates
+    while (query.next()) {
+        let serviceName = query.get("service");
+        let day = query.get("date");
+        let cost = query.get("cost");
+        if (serviceName] === undefined) {
+            resultSet[serviceName] = {};
+        }
+        if (resultSet[serviceName][day] === undefined) {
+            resultSet[serviceName][day] = cost;
+        } else {
+            resultSet[serviceName][day] += cost;
+        }
+    }
 }
 /**
  * (CostPerServicePerDay) => CostPerServicePerMonth
  */
- 
+let aggregateCostDataByMonth = (csd) => {
+    let resultSet = {};
+    for (let key_service of Object.keys(csd)) {
+        if (resultSet[key_service] === undefined) {
+            resultSet[key_service] = {};
+        }
+        for (let key_date of Object.keys(csd[key_service])) {
+            if (resultSet[key_service][new Date(key_date).getMonth()] === undefined) {
+                resultSet[key_service][new Date(key_date).getMonth()] = csd[key_service][key_date];
+            } else {
+                resultSet[key_service][new Date(key_date).getMonth()] += csd[key_service][key_date];
+            }
+        }
+    }
+    return resultSet;
+}
 ```
