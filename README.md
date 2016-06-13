@@ -100,7 +100,7 @@ let purchase_page = Object.create(page, {id: 'purchase_page'});
  * doc: Check stock levels and customer credit, then update stock levels & custom credit
  */
 purchase_page.purchase = (trans, session) => {
-    let result = /* busines logic to take session's basket, perform the appropriate check's & update's and create result */ 
+    let    result = /* busines logic to take session's basket, perform the appropriate check's & update's and create result */ 
     return result;
 }
 ```
@@ -108,12 +108,12 @@ purchase_page.purchase = (trans, session) => {
 Here's another example. Without information on what form the data being returned from this nested set of functions, a developer would need to investigate the details of the implementation to know how to deal with the resturned  object.
 ```javascript
 interface Service: String
-interface Month: Date
-interface Day: Date
-interface Cost: Number
+interface Month:   Date
+interface Day:     Date
+interface Cost:    Number
 
-interface CostPerService: Dictionary[Service, Cost]
-interface CostPerServicePerDay: Dictionary[Day, CostPerService]
+interface CostPerService:         Dictionary[Service, Cost]
+interface CostPerServicePerDay:   Dictionary[Day, CostPerService]
 interface CostPerServicePerMonth: Dictionary[Month, CostPerService]
 ```
 ```javascript
@@ -121,22 +121,22 @@ interface CostPerServicePerMonth: Dictionary[Month, CostPerService]
  * (Date,  Date) => CostPerServicePerMonth, requires: getCostData, aggregateCostDataByMonth
  */
 let getCostDataByMonth = (startDate, endDate) => {
-    let firstDay = // get the first day of the startDate month
-    let lastDay  = // get the last day of the endDate month
-    let allCostData = getCostData(firstDay, lastDay);
-    let aggCostData = aggregateCostDataByMonth(allCostData);
+    let    firstDay    = // get the first day of the startDate month
+    let    lastDay     = // get the last day of the endDate month
+    let    allCostData = getCostData(firstDay, lastDay);
+    let    aggCostData = aggregateCostDataByMonth(allCostData);
     return aggCostData;
 }
 /**
  * (Day,  Day) => CostPerServicePerDay
  */
 let getCostData = (firstDay, lastDay) => {
-    let resultSet = {};
-    let query = // perform a query to get all rows of effort record between the two dates
+    let   resultSet = {};
+    let   query     = // perform a query to get all rows of effort record between the two dates
     while (query.next()) {
-        let serviceName = query.get("service");
-        let day = query.get("date");
-        let cost = query.get("cost");
+        let serviceName  = query.get("service");
+        let day          = query.get("date");
+        let cost         = query.get("cost");
         if (serviceName] === undefined) {
             resultSet[serviceName] = {};
         }
