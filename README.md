@@ -10,7 +10,12 @@ RDoc allows developers to make use of Rtypes in expressive block comments which 
 RFX provides developers with the same benefits listed above with the added benefit that code written in RFX is effectively _self documenting_. There are also potential performance benefits driving the project.
 
 For existing code, or new projects which cannot employ RFX, RDoc will offer a familiar pattern of block comment documentation similar to JSDoc, but with enhanced readability & maintainability in code, richer generated docs & powerful tooling potential.
- 
+
+# Rdoc roadmap
+* [x] A concise and expressive commenting specification
+* [ ] Information extraction for IDE tooling
+* [ ] Documentation generation
+
 # Block comment
 The block comments are a natural and established way to want to document your code. But the comments you write bear little resemblance to the code they describe, and they require a lot of text which both make them difficult to maintain.
 ### Old 'n' busted
@@ -30,11 +35,21 @@ let add = (op1, op2) => op1 + op2;
 ### Other hotness
 ```javascript
 /**
+ * (op1: Number, op2: Number) => Number
+ * doc: Add two numbers together
+ */
+let add = (op1, op2) => op1 + op2;
+```
+It is possible to leave out the parameter name and have it derived from the function definition it is immediately followed by
+
+```javascript
+/**
  * (Number, Number) => Number
  * doc: Add two numbers together
  */
 let add = (op1, op2) => op1 + op2;
 ```
+
 # Requires
 The `requires` keyword makes it immediately clear where dependencies exist within code
 ```javascript
@@ -113,8 +128,8 @@ interface Day:     Date
 interface Cost:    Number
 
 interface CostPerService:         Dictionary[Service, Cost]
-interface CostPerServicePerDay:   Dictionary[Day, CostPerService]
-interface CostPerServicePerMonth: Dictionary[Month, CostPerService]
+interface CostPerServicePerDay:   Dictionary[Day,     CostPerService]
+interface CostPerServicePerMonth: Dictionary[Month,   CostPerService]
 ```
 ```javascript
 /**
@@ -158,7 +173,7 @@ let aggregateCostDataByMonth = (csd) => {
         }
         for (let key_date of Object.keys(csd[key_service])) {
             if (resultSet[key_service][new Date(key_date).getMonth()] === undefined) {
-                resultSet[key_service][new Date(key_date).getMonth()] = csd[key_service][key_date];
+                resultSet[key_service][new Date(key_date).getMonth()] =  csd[key_service][key_date];
             } else {
                 resultSet[key_service][new Date(key_date).getMonth()] += csd[key_service][key_date];
             }
@@ -167,3 +182,8 @@ let aggregateCostDataByMonth = (csd) => {
     return resultSet;
 }
 ```
+
+# Parsed information
+The parser is yet to be created, but it will aim to create a data structure from the block comments and rtype files which will then be usable by ide's to provide tooling including :
+* Tool tips on variables to specify their supposed type
+* Warning highlighting on function calls using 'incorrect' types
