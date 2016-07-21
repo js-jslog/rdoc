@@ -187,3 +187,4 @@ let aggregateCostDataByMonth = (csd) => {
 The parser is yet to be created, but it will aim to create a data structure from the block comments and rtype files which will then be usable by ide's to provide tooling including :
 * Tool tips on variables to specify their supposed type
 * Warning highlighting on function calls using 'incorrect' types
+* Assistance to locating the function definitions of function calls
